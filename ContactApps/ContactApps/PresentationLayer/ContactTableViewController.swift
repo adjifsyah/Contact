@@ -28,8 +28,9 @@ class ContactTableViewController: UITableViewController {
     }
     
     @objc func addAction() {
-        let vc = AnotherClass()
-        navigationController?.present(vc, animated: true, completion: nil)
+        let vc = CreateViewController()
+        let navigationVC = UINavigationController(rootViewController: vc)
+        navigationController?.present(navigationVC, animated: true, completion: nil)
     }
     // MARK: - Table view data source
 
