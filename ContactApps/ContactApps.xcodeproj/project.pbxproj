@@ -13,6 +13,7 @@
 		0AD1ED1A283FC89B006A385C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AD1ED18283FC89B006A385C /* LaunchScreen.storyboard */; };
 		0AD1ED30283FD91D006A385C /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD1ED2F283FD91D006A385C /* CreateViewController.swift */; };
 		0AD1ED39283FE697006A385C /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD1ED38283FE697006A385C /* FormTextField.swift */; };
+		0AD1ED42283FFCEE006A385C /* Contact.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0AD1ED40283FFCEE006A385C /* Contact.xcdatamodeld */; };
 		C849E0EB283FCD64009174C4 /* ContactTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C849E0EA283FCD64009174C4 /* ContactTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		0AD1ED1B283FC89B006A385C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AD1ED2F283FD91D006A385C /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		0AD1ED38283FE697006A385C /* FormTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FormTextField.swift; path = ContactApps/PresentationLayer/FormTextField.swift; sourceTree = SOURCE_ROOT; };
+		0AD1ED41283FFCEE006A385C /* Contact.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Contact.xcdatamodel; sourceTree = "<group>"; };
 		C849E0EA283FCD64009174C4 /* ContactTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -42,6 +44,7 @@
 		0AD1ED01283FC88D006A385C = {
 			isa = PBXGroup;
 			children = (
+				0AD1ED40283FFCEE006A385C /* Contact.xcdatamodeld */,
 				0AD1ED0C283FC88D006A385C /* ContactApps */,
 				0AD1ED0B283FC88D006A385C /* Products */,
 			);
@@ -197,6 +200,7 @@
 			files = (
 				0AD1ED30283FD91D006A385C /* CreateViewController.swift in Sources */,
 				0AD1ED39283FE697006A385C /* FormTextField.swift in Sources */,
+				0AD1ED42283FFCEE006A385C /* Contact.xcdatamodeld in Sources */,
 				0AD1ED0E283FC88D006A385C /* AppDelegate.swift in Sources */,
 				0AD1ED10283FC88D006A385C /* SceneDelegate.swift in Sources */,
 				C849E0EB283FCD64009174C4 /* ContactTableViewController.swift in Sources */,
@@ -393,6 +397,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0AD1ED40283FFCEE006A385C /* Contact.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0AD1ED41283FFCEE006A385C /* Contact.xcdatamodel */,
+			);
+			currentVersion = 0AD1ED41283FFCEE006A385C /* Contact.xcdatamodel */;
+			path = Contact.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0AD1ED02283FC88D006A385C /* Project object */;
 }

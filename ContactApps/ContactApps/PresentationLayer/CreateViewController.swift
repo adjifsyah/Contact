@@ -112,11 +112,13 @@ class CreateViewController: UIViewController {
     private func addSubview() {
         view.addSubview(scrollView)
         
-        namesStackView.addArrangedSubview(firstNameTextField)
-        namesStackView.addArrangedSubview(lastNameTextField)
-        namesStackView.addArrangedSubview(aliasNameTextField)
-        
         scrollView.addSubview(containerView)
+        
+        containerView.addSubview(namesStackView)
+        containerView.addSubview(mobilePhoneTextField)
+        containerView.addSubview(emailTextField)
+        containerView.addSubview(addressTextField)
+        containerView.addSubview(mobilePhoneTextField)
     }
     
     private func configNavigationView() {
