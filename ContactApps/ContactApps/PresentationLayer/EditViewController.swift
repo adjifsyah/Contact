@@ -1,14 +1,15 @@
 //
-//  CreateViewController.swift
+//  EditViewController.swift
 //  ContactApps
 //
-//  Created by Adji Firmansyah on 5/26/22.
+//  Created by Adji Firmansyah on 5/27/22.
 //
 
 import UIKit
 import CoreData
 
-class CreateViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class EditViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
     var photo: UIImage = UIImage()
     
     lazy var addPhotoButton: UIButton = {
@@ -27,13 +28,11 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         lbl.textColor = .systemBlue
         lbl.font = UIFont.systemFont(ofSize: 16)
         lbl.textAlignment = .center
-//        lbl.addTarget(self, action: #selector(addPhotoAction), for: .touchUpInside)
         return lbl
     }()
     
     lazy var firstNameTextField: FormTextField = {
         var firstNameTF = FormTextField()
-//        firstNameTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         firstNameTF.configure(placeholder: "First name")
         firstNameTF.setHeight = 40
         firstNameTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -43,7 +42,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     lazy var lastNameTextField: FormTextField = {
         var firstNameTF = FormTextField()
-//        firstNameTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         firstNameTF.configure(placeholder: "Last name")
         firstNameTF.setHeight = 40
         firstNameTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -53,7 +51,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     lazy var aliasNameTextField: FormTextField = {
         var aliasNameTF = FormTextField()
-//        aliasNameTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         aliasNameTF.configure(placeholder: "Alias name")
         aliasNameTF.setHeight = 40
         aliasNameTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -63,7 +60,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     lazy var dateOfBirthTextField: FormTextField = {
         var dateOfBirthTF = FormTextField()
-//        dateOfBirthTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         dateOfBirthTF.configure(placeholder: "Date of Birth")
         dateOfBirthTF.setHeight = 40
         dateOfBirthTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -74,10 +70,7 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
             datePicker.preferredDatePickerStyle = .wheels
         }
         datePicker.addTarget(self, action: #selector(self.datePickerValueChanged(datePicker:)), for: .valueChanged)
-
-        
         dateOfBirthTF.formTextField.inputView = datePicker
-
         
         return dateOfBirthTF
     }()
@@ -85,7 +78,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     lazy var mobilePhoneTextField: FormTextField = {
         var mobilePhoneTF = FormTextField()
-//        mobilePhoneTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         mobilePhoneTF.configure(placeholder: "Mobile phone")
         mobilePhoneTF.setHeight = 40
         mobilePhoneTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -95,7 +87,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     lazy var emailTextField: FormTextField = {
         var emailTF = FormTextField()
-//        emailTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         emailTF.configure(placeholder: "Email")
         emailTF.setHeight = 40
         emailTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -105,7 +96,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     lazy var addressTextField: FormTextField = {
         var addressTF = FormTextField()
-//        addressTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         addressTF.configure(placeholder: "Address")
         addressTF.setHeight = 40
         addressTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -115,63 +105,13 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
 
     lazy var notesTextField: FormTextField = {
         var notesTF = FormTextField()
-//        notesTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         notesTF.configure(placeholder: "First name")
-//        notesTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         notesTF.configure(placeholder: "Notes")
         notesTF.setHeight = 40
         notesTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
         
         return notesTF
     }()
-    
-    
-//    Date of Birth (Optional) (Format: Sat, 28 Jun 2022)
-//    - Photo (Optional)
-//        - If there is no photo, use the first character and last character as the image
-//    - Mobile Phone (Required)
-//    - Email (Required)
-//    - Notes (Optional)
-    
-//    lazy var mobilePhoneTextField: FormTextField = {
-//        var mobilePhoneTF = FormTextField()
-//        mobilePhoneTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
-//        mobilePhoneTF.configure(placeholder: "Mobile phone")
-//        mobilePhoneTF.setHeight = 40
-//        mobilePhoneTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
-//
-//        return mobilePhoneTF
-//    }()
-//
-//    lazy var emailTextField: FormTextField = {
-//        var emailTF = FormTextField()
-//        emailTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
-//        emailTF.configure(placeholder: "Email")
-//        emailTF.setHeight = 40
-//        emailTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
-//
-//        return emailTF
-//    }()
-//
-//    lazy var addressTextField: FormTextField = {
-//        var addressTF = FormTextField()
-//        addressTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
-//        addressTF.configure(placeholder: "Address")
-//        addressTF.setHeight = 40
-//        addressTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
-//
-//        return addressTF
-//    }()
-//
-//    lazy var notesTextField: FormTextField = {
-//        var notesTF = FormTextField()
-//        notesTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
-//        notesTF.configure(placeholder: "First name")
-//        notesTF.setHeight = 40
-//        notesTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
-//
-//        return notesTF
-//    }()
     
     private lazy var addPhotoStackView: UIStackView = {
         var addPhotoStackView = UIStackView(arrangedSubviews: [
@@ -224,9 +164,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         scrollView.addSubview(containerView)
         containerView.addSubview(addPhotoStackView)
         containerView.addSubview(namesStackView)
-//        containerView.addSubview(mobilePhoneTextField)
-//        containerView.addSubview(emailTextField)
-//        containerView.addSubview(addressTextField)
     }
     
     private func configNavigationView() {
@@ -240,7 +177,7 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         )
         
         let rightBarButtonItem = UIBarButtonItem(
-            title: "Done",
+            title: "Save",
             style: .done,
             target: self,
             action: #selector(saveContact)
@@ -252,7 +189,7 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     @objc private func cancel(textField: UITextField) {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func saveContact(textField: UITextField) {
@@ -274,7 +211,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
                 
         do {
             try managedContext.save()
-//            print("sukses",userEntity)
             
         } catch {
             print("Error")
@@ -308,10 +244,6 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         containerView.translatesAutoresizingMaskIntoConstraints         = false
         addPhotoStackView.translatesAutoresizingMaskIntoConstraints     = false
         namesStackView.translatesAutoresizingMaskIntoConstraints        = false
-//        mobilePhoneTextField.translatesAutoresizingMaskIntoConstraints  = false
-//        emailTextField.translatesAutoresizingMaskIntoConstraints        = false
-//        addressTextField.translatesAutoresizingMaskIntoConstraints      = false
-        
         
         scrollView.topAnchor.constraint(
             equalTo: view.topAnchor).isActive       = true
@@ -355,40 +287,8 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         namesStackView.trailingAnchor.constraint(
             equalTo: containerView.trailingAnchor).isActive = true
         
-        
-//        mobilePhoneTextField.topAnchor.constraint(
-//            equalTo: namesStackView.bottomAnchor,
-//            constant: 24).isActive = true
-//        mobilePhoneTextField.leadingAnchor.constraint(
-//            equalTo: containerView.leadingAnchor,
-//            constant: 16).isActive = true
-//        mobilePhoneTextField.trailingAnchor.constraint(
-//            equalTo: containerView.trailingAnchor,
-//            constant: -16).isActive = true
-//
-//        emailTextField.topAnchor.constraint(
-//            equalTo: mobilePhoneTextField.bottomAnchor,
-//            constant: 24).isActive = true
-//        emailTextField.leadingAnchor.constraint(
-//            equalTo: containerView.leadingAnchor,
-//            constant: 16).isActive = true
-//        emailTextField.trailingAnchor.constraint(
-//            equalTo: containerView.trailingAnchor,
-//            constant: -16).isActive = true
-//
-//        addressTextField.topAnchor.constraint(
-//            equalTo: emailTextField.bottomAnchor,
-//            constant: 24).isActive = true
-//        addressTextField.leadingAnchor.constraint(
-//            equalTo: containerView.leadingAnchor,
-//            constant: 16).isActive = true
-//        addressTextField.trailingAnchor.constraint(
-//            equalTo: containerView.trailingAnchor,
-//            constant: -16).isActive = true
-//        addressTextField.bottomAnchor.constraint(
-//            equalTo: containerView.bottomAnchor,
-//            constant: -24).isActive = true
-        
     }
-    
+
 }
+
+

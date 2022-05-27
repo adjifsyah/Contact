@@ -10,18 +10,18 @@ import UIKit
 class DetailViewController: UIViewController {
     private lazy var profileContainer: UIView = {
         var container = UIView()
-        container.backgroundColor = .systemBlue
+        container.backgroundColor = .darkGray
         container.clipsToBounds = true
         container.layer.cornerRadius = 50
         return container
     }()
     
-//    lazy var imageProfile: UIImageView = {
-//       var imageProfile = UIImageView()
-//        imageProfile.contentMode = .scaleAspectFill
-//        imageProfile.clipsToBounds = true
-//        return imageProfile
-//    }()
+    lazy var imageProfile: UIImageView = {
+       var imageProfile = UIImageView()
+        imageProfile.contentMode = .scaleAspectFill
+        imageProfile.clipsToBounds = true
+        return imageProfile
+    }()
     
     lazy var fullnameLabel: UILabel = {
        var fullnameLabel = UILabel()
@@ -97,6 +97,18 @@ class DetailViewController: UIViewController {
         return addressSV
     }()
     
+    private lazy var scrollView: UIScrollView = {
+        var scrollView = UIScrollView()
+        return scrollView
+    }()
+    
+    private lazy var containerView: UIView = {
+        var container = UIView()
+        return container
+    }()
+    
+    var heightConstraint: NSLayoutConstraint?
+    
 //    private lazy var detailStackView: UIStackView = {
 //       var mobileSV = UIStackView(arrangedSubviews: [mobileStackView, emailStackView, addressStackView])
 //        mobileSV.axis = .vertical
@@ -110,23 +122,25 @@ class DetailViewController: UIViewController {
         setupConstraint()
     }
     
-    private lazy var scrollView: UIScrollView = {
-        var scrollView = UIScrollView()
-        return scrollView
-    }()
-    
-    private lazy var containerView: UIView = {
-        var container = UIView()
-        return container
-    }()
-    
-    var heightConstraint: NSLayoutConstraint?
-    
     private func configView() {
         view.backgroundColor = .secondarySystemBackground
         mobileSection.text = "Mobile phone"
         emailSection.text = "Email"
         addressSection.text = "Address"
+        
+        let rightBarButtonItem = UIBarButtonItem(
+            title: "Edit",
+            style: .plain,
+            target: self,
+            action: #selector(editContact)
+        )
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    private func profileImage() {
+        if imageProfile.image == nil {
+            
+        }
     }
     
     private func addSubview() {
@@ -137,7 +151,11 @@ class DetailViewController: UIViewController {
         containerView.addSubview(mobileStackView)
         containerView.addSubview(emailStackView)
         containerView.addSubview(addressStackView)
-        
+    }
+    
+    @objc private func editContact() {
+        let vc = EditViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     private func setupConstraint() {
@@ -167,8 +185,6 @@ class DetailViewController: UIViewController {
         
         profileContainer.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 24).isActive = true
         profileContainer.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-        profileContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24).isActive = true
-        profileContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24).isActive = true
         profileContainer.heightAnchor.constraint(equalToConstant: 100).isActive = true
         profileContainer.widthAnchor.constraint(equalToConstant: 100).isActive = true
         

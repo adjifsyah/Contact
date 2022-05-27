@@ -112,10 +112,11 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
         let cellCurrent = tableView.cellForRow(at: indexSelect ?? indexPath)
         let detailViewController = DetailViewController()
         let users = users[indexPath.row]
-        detailViewController.fullnameLabel.text = cellCurrent?.textLabel?.text
-        detailViewController.mobilePhone.text = "0812 0000 0000"
-        detailViewController.emailLabel.text = "binar@academy.com"
-        detailViewController.addressLabel.text = "Jakarta, Indonesia"
+        detailViewController.fullnameLabel.text = [users.firstName, users.lastName].joined(separator: " ")
+        detailViewController.mobilePhone.text = users.mobilePhone
+        detailViewController.emailLabel.text = users.email
+        detailViewController.addressLabel.text =
+            users.address
         
         navigationController?.pushViewController(detailViewController, animated: true)
     }
