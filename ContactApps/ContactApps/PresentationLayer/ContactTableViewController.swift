@@ -38,7 +38,14 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
                 users.append(
                     UserModel(
                         firstName: user.value(forKey: "first_name") as! String,
-                        lastName: user.value(forKey: "last_name") as! String
+                        lastName: user.value(forKey: "last_name") as! String,
+                        aliasName: user.value(forKey: "alias_name") as! String,
+                        dateOfBirth: user.value(forKey: "date_of_birth") as! String,
+                        mobilePhone: user.value(forKey: "mobile_phone") as! String,
+                        email: user.value(forKey: "email") as! String,
+                        address: user.value(forKey: "address") as! String,
+                        notes: user.value(forKey: "notes") as! String,
+                        photo: user.value(forKey: "photo") as! Data
                     )
                 )
             }
