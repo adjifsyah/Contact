@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    private lazy var profileContainer: UIView = {
+    lazy var profileContainer: UIView = {
         var container = UIView()
         container.backgroundColor = .systemBlue
         container.clipsToBounds = true

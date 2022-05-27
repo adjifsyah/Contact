@@ -10,6 +10,7 @@ import CoreData
 
 class CreateViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var photo: UIImage = UIImage()
+    var reloadData: (() -> Void)?
     
     lazy var addPhotoButton: UIButton = {
         let button = UIButton()
@@ -271,14 +272,12 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         userEntity.address = addressTextField.formTextField.text
         userEntity.notes = notesTextField.formTextField.text
         userEntity.photo = photo.jpegData(compressionQuality: 0.5)
-                
+       
         do {
             try managedContext.save()
-<<<<<<< HEAD
-//            print("sukses",userEntity)
+            reloadData?()
+            self.navigationController?.dismiss(animated: true, completion:nil);
             
-=======
->>>>>>> db94ce794d7b316a8e0abb67f92c3004466a24dd
         } catch {
             print("Error")
         }
