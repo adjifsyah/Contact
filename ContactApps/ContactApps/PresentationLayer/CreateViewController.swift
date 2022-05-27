@@ -154,8 +154,8 @@ class CreateViewController: UIViewController {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         let userEntity = UserEntity(context: managedContext)
-        userEntity.first_name = firstNameTextField.formTextField.text
-        userEntity.last_name = lastNameTextField.formTextField.text
+        userEntity.first = firstNameTextField.formTextField.text
+        userEntity.last = lastNameTextField.formTextField.text
         
         
         do {

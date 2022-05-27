@@ -9,6 +9,7 @@ import UIKit
 import CoreData
 
 class ContactTableViewController: UITableViewController {
+    var context: NSManagedObjectContext?
     var users: [NSManagedObject] = []
     
     override func viewWillAppear(_ animated: Bool) {
@@ -16,14 +17,22 @@ class ContactTableViewController: UITableViewController {
         
         let managedContext = appDelegate.persistentContainer.viewContext
         
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserModel")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserEntity")
         
         do {
-            users = try managedContext.fetch(fetchRequest)
+            let result = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
+            users = result ?? []
+        } catch let err{
+            print(err)
         }
+        
+        tableView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "contactListCell")
+        tableView.delegate = self
+        tableView.dataSource = self
         setupNavigationItem()
     }
 
@@ -54,8 +63,9 @@ class ContactTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactListCell", for: indexPath)
-        let row: Int = indexPath.row
-        cell.textLabel?.text = users[row].
+//        let row: Int = indexPath.row
+        
+        cell.textLabel?.text = UserEntity.value(forKey: "first") as? String
         return cell
     }
 
