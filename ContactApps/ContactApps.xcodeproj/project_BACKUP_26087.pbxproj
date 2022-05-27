@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01786B0828409F1000113FDE /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01786B0728409F1000113FDE /* UIImage+Extension.swift */; };
+<<<<<<< HEAD
 		0A13F50E284083EF003BE319 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F50D284083EF003BE319 /* DetailViewController.swift */; };
+=======
+		01786B0828409F1000113FDE /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01786B0728409F1000113FDE /* UIImage+Extension.swift */; };
+>>>>>>> db94ce794d7b316a8e0abb67f92c3004466a24dd
 		0AD1ED0E283FC88D006A385C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD1ED0D283FC88D006A385C /* AppDelegate.swift */; };
 		0AD1ED10283FC88D006A385C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD1ED0F283FC88D006A385C /* SceneDelegate.swift */; };
 		0AD1ED17283FC89B006A385C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AD1ED16283FC89B006A385C /* Assets.xcassets */; };
@@ -21,8 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01786B0728409F1000113FDE /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		0A13F50D284083EF003BE319 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+=======
+		01786B0728409F1000113FDE /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+>>>>>>> db94ce794d7b316a8e0abb67f92c3004466a24dd
 		0AD1ED0A283FC88D006A385C /* ContactApps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactApps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD1ED0D283FC88D006A385C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AD1ED0F283FC88D006A385C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };

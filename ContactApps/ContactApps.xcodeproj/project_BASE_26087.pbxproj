@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01786B0828409F1000113FDE /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01786B0728409F1000113FDE /* UIImage+Extension.swift */; };
-		0A13F50E284083EF003BE319 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A13F50D284083EF003BE319 /* DetailViewController.swift */; };
 		0AD1ED0E283FC88D006A385C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD1ED0D283FC88D006A385C /* AppDelegate.swift */; };
 		0AD1ED10283FC88D006A385C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AD1ED0F283FC88D006A385C /* SceneDelegate.swift */; };
 		0AD1ED17283FC89B006A385C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AD1ED16283FC89B006A385C /* Assets.xcassets */; };
@@ -21,8 +19,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		01786B0728409F1000113FDE /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		0A13F50D284083EF003BE319 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		0AD1ED0A283FC88D006A385C /* ContactApps.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactApps.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AD1ED0D283FC88D006A385C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AD1ED0F283FC88D006A385C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,14 +43,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		01786B0628409EE300113FDE /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				01786B0728409F1000113FDE /* UIImage+Extension.swift */,
-			);
-			path = Extension;
-			sourceTree = "<group>";
-		};
 		0AD1ED01283FC88D006A385C = {
 			isa = PBXGroup;
 			children = (
@@ -113,7 +101,6 @@
 		C849E0E5283FCAA0009174C4 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				01786B0628409EE300113FDE /* Extension */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -132,7 +119,6 @@
 				0AD1ED36283FE66F006A385C /* Components */,
 				C849E0EA283FCD64009174C4 /* ContactTableViewController.swift */,
 				0AD1ED2F283FD91D006A385C /* CreateViewController.swift */,
-				0A13F50D284083EF003BE319 /* DetailViewController.swift */,
 			);
 			path = PresentationLayer;
 			sourceTree = "<group>";
@@ -215,11 +201,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A13F50E284083EF003BE319 /* DetailViewController.swift in Sources */,
 				0AD1ED30283FD91D006A385C /* CreateViewController.swift in Sources */,
 				0AD1ED7028400AF8006A385C /* UserModel.swift in Sources */,
 				0AD1ED39283FE697006A385C /* FormTextField.swift in Sources */,
-				01786B0828409F1000113FDE /* UIImage+Extension.swift in Sources */,
 				0AD1ED0E283FC88D006A385C /* AppDelegate.swift in Sources */,
 				0AD1ED10283FC88D006A385C /* SceneDelegate.swift in Sources */,
 				0AD1ED6B284001B2006A385C /* ContactApps.xcdatamodeld in Sources */,
