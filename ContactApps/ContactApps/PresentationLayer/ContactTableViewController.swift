@@ -35,6 +35,7 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
             print(result.count)
             guard result.count != 0 else {return}
             result.forEach { user in
+                users = []
                 users.append(
                     UserModel(
                         firstName: user.value(forKey: "first_name") as! String,
@@ -45,7 +46,7 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
                         email: user.value(forKey: "email") as! String,
                         address: user.value(forKey: "address") as! String,
                         notes: user.value(forKey: "notes") as! String,
-                        photo: user.value(forKey: "photo") as! Data
+                        photo: user.value(forKey: "photo") as? Data ?? Data()
                     )
                 )
             }
@@ -110,10 +111,11 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
         let indexSelect = tableView.indexPathForSelectedRow
         let cellCurrent = tableView.cellForRow(at: indexSelect ?? indexPath)
         let detailViewController = DetailViewController()
+        let users = users[indexPath.row]
         detailViewController.fullnameLabel.text = cellCurrent?.textLabel?.text
-        detailViewController.mobilePhone.text = "0856 9999 9999"
-        
+        detailViewController.mobilePhone.text = "0812 0000 0000"
         detailViewController.emailLabel.text = "binar@academy.com"
+        detailViewController.addressLabel.text = "Jakarta, Indonesia"
         
         navigationController?.pushViewController(detailViewController, animated: true)
     }
