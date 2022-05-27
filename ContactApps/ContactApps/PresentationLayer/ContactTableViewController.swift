@@ -7,14 +7,29 @@
 
 import UIKit
 
-class ContactTableViewController: UITableViewController {
-
+class ContactTableViewController: UITableViewController, UISearchBarDelegate {
+    lazy var searchBar:UISearchBar = {
+        var searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = " Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.backgroundImage = UIImage()
+        searchBar.delegate = self
+        return searchBar
+    }()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupNavigationItem()
+        tableView.tableHeaderView = searchBar
+//        view.addSubview(searchBar)
     }
-
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange textSearched: String)
+    {
+        print(textSearched)
+    }
     
     func setupNavigationItem() {
         title = "Contact"

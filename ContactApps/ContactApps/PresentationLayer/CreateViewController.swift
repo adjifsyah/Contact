@@ -250,8 +250,7 @@ class CreateViewController: UIViewController {
     
     @objc func datePickerValueChanged(datePicker: UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
+        dateFormatter.dateFormat = "E, dd MMM yyyy"
         dateOfBirthTextField.formTextField.text = dateFormatter.string(from: datePicker.date)
     }
     
