@@ -114,15 +114,7 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
-        let users = users[indexPath.row]
-
-        detailViewController.profileContainer.backgroundColor = UIColor(patternImage:  UIImage(data: users.photo)!)
-        detailViewController.fullnameLabel.text = [users.firstName, users.lastName].joined(separator: " ")
-        detailViewController.mobilePhone.text = users.mobilePhone
-        detailViewController.emailLabel.text = users.email
-        detailViewController.addressLabel.text =
-            users.address
-        
+        detailViewController.fill( users[indexPath.row] )
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 

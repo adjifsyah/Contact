@@ -24,53 +24,67 @@ class DetailViewController: UIViewController {
     }()
     
     lazy var fullnameLabel: UILabel = {
-       var fullnameLabel = UILabel()
-        fullnameLabel.textAlignment = .center
-        fullnameLabel.font = .systemFont(ofSize: 18, weight: .regular)
-        fullnameLabel.textColor = .black
-        return fullnameLabel
+       var lbl = UILabel()
+        lbl.textAlignment = .center
+        lbl.font = .systemFont(ofSize: 18, weight: .regular)
+        lbl.textColor = .black
+        return lbl
     }()
     
     private lazy var mobileSection: UILabel = {
-       var fullnameLabel = UILabel()
-        fullnameLabel.font = .systemFont(ofSize: 12)
-        fullnameLabel.textColor = .black
-        return fullnameLabel
+       var lbl = UILabel()
+        lbl.font = .systemFont(ofSize: 12)
+        lbl.textColor = .black
+        return lbl
     }()
     
     lazy var mobilePhone: UILabel = {
-       var fullnameLabel = UILabel()
-        fullnameLabel.font = .systemFont(ofSize: 18)
-        fullnameLabel.textColor = .systemBlue
-        return fullnameLabel
+       var lbl = UILabel()
+        lbl.font = .systemFont(ofSize: 18)
+        lbl.textColor = .systemBlue
+        return lbl
     }()
     
     private lazy var emailSection: UILabel = {
-       var fullnameLabel = UILabel()
-        fullnameLabel.font = .systemFont(ofSize: 12)
-        fullnameLabel.textColor = .black
-        return fullnameLabel
+       var lbl = UILabel()
+        lbl.font = .systemFont(ofSize: 12)
+        lbl.textColor = .black
+        return lbl
     }()
     
     lazy var emailLabel: UILabel = {
-       var fullnameLabel = UILabel()
-        fullnameLabel.font = .systemFont(ofSize: 18)
-        fullnameLabel.textColor = .systemBlue
-        return fullnameLabel
+       var lbl = UILabel()
+        lbl.font = .systemFont(ofSize: 18)
+        lbl.textColor = .systemBlue
+        return lbl
     }()
     
     private lazy var addressSection: UILabel = {
-       var fullnameLabel = UILabel()
-        fullnameLabel.font = .systemFont(ofSize: 12)
-        fullnameLabel.textColor = .black
-        return fullnameLabel
+       var lbl = UILabel()
+        lbl.font = .systemFont(ofSize: 12)
+        lbl.textColor = .black
+        return lbl
     }()
     
     lazy var addressLabel: UILabel = {
-       var fullnameLabel = UILabel()
-        fullnameLabel.font = .systemFont(ofSize: 18)
-        fullnameLabel.textColor = .systemBlue
-        return fullnameLabel
+       var lbl = UILabel()
+        lbl.font = .systemFont(ofSize: 18)
+        lbl.textColor = .systemBlue
+        return lbl
+    }()
+    
+    private lazy var notesSection: UILabel = {
+       var lbl = UILabel()
+        lbl.font = .systemFont(ofSize: 12)
+        lbl.textColor = .black
+        return lbl
+    }()
+    
+    lazy var notesLabel: UILabel = {
+       var lbl = UILabel()
+        lbl.font = .systemFont(ofSize: 18)
+        lbl.textColor = .systemBlue
+        return lbl
     }()
     
     private lazy var mobileStackView: UIStackView = {
@@ -95,6 +109,14 @@ class DetailViewController: UIViewController {
         addressSV.spacing = 4
         addressSV.backgroundColor = .white
         return addressSV
+    }()
+    
+    private lazy var notesStackView: UIStackView = {
+       var notesSV = UIStackView(arrangedSubviews: [notesSection, notesLabel])
+        notesSV.axis = .vertical
+        notesSV.spacing = 4
+        notesSV.backgroundColor = .white
+        return notesSV
     }()
     
     private lazy var scrollView: UIScrollView = {
@@ -127,6 +149,7 @@ class DetailViewController: UIViewController {
         mobileSection.text = "Mobile phone"
         emailSection.text = "Email"
         addressSection.text = "Address"
+        notesSection.text = "Notes"
         
         let rightBarButtonItem = UIBarButtonItem(
             title: "Edit",
@@ -142,6 +165,36 @@ class DetailViewController: UIViewController {
             
         }
     }
+    func imageWith(name: String?) -> UIImage? {
+         let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+         let nameLabel = UILabel(frame: frame)
+         nameLabel.textAlignment = .center
+         nameLabel.backgroundColor = .lightGray
+         nameLabel.textColor = .white
+         nameLabel.font = UIFont.boldSystemFont(ofSize: 40)
+         nameLabel.text = name
+         UIGraphicsBeginImageContext(frame.size)
+          if let currentContext = UIGraphicsGetCurrentContext() {
+             nameLabel.layer.render(in: currentContext)
+             let nameImage = UIGraphicsGetImageFromCurrentImageContext()
+             return nameImage
+          }
+          return UIImage()
+    }
+    
+    func fill(_ users: UserModel){
+        let firstChar = String(users.firstName.prefix(1))
+        let photo = UIImage(data: users.photo)?.resized(to: CGSize(width: 170, height: 170))
+        profileContainer.backgroundColor = UIColor(patternImage:(  photo ?? imageWith(name: firstChar))! )
+        let aliasName = users.aliasName != "" ? "(\(users.aliasName))" : ""
+        fullnameLabel.text = [users.firstName, users.lastName, aliasName].joined(separator: " ")
+        mobilePhone.text = users.mobilePhone
+        emailLabel.text = users.email
+        addressLabel.text = users.address
+        notesLabel.text = users.notes
+        
+
+    }
     
     
     private func addSubview() {
@@ -152,6 +205,7 @@ class DetailViewController: UIViewController {
         containerView.addSubview(mobileStackView)
         containerView.addSubview(emailStackView)
         containerView.addSubview(addressStackView)
+        containerView.addSubview(notesStackView)
     }
     
     @objc private func editContact() {
@@ -167,6 +221,7 @@ class DetailViewController: UIViewController {
         mobileStackView.translatesAutoresizingMaskIntoConstraints = false
         emailStackView.translatesAutoresizingMaskIntoConstraints = false
         addressStackView.translatesAutoresizingMaskIntoConstraints = false
+        notesStackView.translatesAutoresizingMaskIntoConstraints = false
         
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -203,7 +258,11 @@ class DetailViewController: UIViewController {
         addressStackView.topAnchor.constraint(equalTo: emailStackView.bottomAnchor, constant: 32).isActive = true
         addressStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
         addressStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
-        addressStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -24).isActive = true
+        
+        notesStackView.topAnchor.constraint(equalTo: addressStackView.bottomAnchor, constant: 32).isActive = true
+        notesStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16).isActive = true
+        notesStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16).isActive = true
+        notesStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -24).isActive = true
     }
 
 }
