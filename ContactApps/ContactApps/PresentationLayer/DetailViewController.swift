@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    private lazy var profileContainer: UIView = {
+    lazy var profileContainer: UIView = {
         var container = UIView()
         container.backgroundColor = .darkGray
         container.clipsToBounds = true
@@ -143,6 +143,7 @@ class DetailViewController: UIViewController {
         }
     }
     
+    
     private func addSubview() {
         view.addSubview(scrollView)
         scrollView.addSubview(containerView)
@@ -166,7 +167,6 @@ class DetailViewController: UIViewController {
         mobileStackView.translatesAutoresizingMaskIntoConstraints = false
         emailStackView.translatesAutoresizingMaskIntoConstraints = false
         addressStackView.translatesAutoresizingMaskIntoConstraints = false
-//        detailStackView.translatesAutoresizingMaskIntoConstraints = false
         
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true

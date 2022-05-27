@@ -22,8 +22,7 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
         searchBar.delegate = self
         return searchBar
     }()
-    
-    override func viewWillAppear(_ animated: Bool) {
+    func getData(){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let managedContext = appDelegate.persistentContainer.viewContext
@@ -34,8 +33,8 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
             let result = try managedContext.fetch(fetchRequest) as! [NSManagedObject]
             print(result.count)
             guard result.count != 0 else {return}
+            users = []
             result.forEach { user in
-                users = []
                 users.append(
                     UserModel(
                         firstName: user.value(forKey: "first_name") as! String,
@@ -56,6 +55,10 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
         }
         
         tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getData()
     }
    
     override func viewDidLoad() {
@@ -86,6 +89,8 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
     
     @objc func addAction() {
         let vc = CreateViewController()
+        let reloadData = {self.getData()}
+        vc.reloadData = reloadData
         let navigationVC = UINavigationController(rootViewController: vc)
         navigationController?.present(navigationVC, animated: true, completion: nil)
     }
@@ -108,10 +113,10 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let indexSelect = tableView.indexPathForSelectedRow
-        let cellCurrent = tableView.cellForRow(at: indexSelect ?? indexPath)
         let detailViewController = DetailViewController()
         let users = users[indexPath.row]
+
+        detailViewController.profileContainer.backgroundColor = UIColor(patternImage:  UIImage(data: users.photo)!)
         detailViewController.fullnameLabel.text = [users.firstName, users.lastName].joined(separator: " ")
         detailViewController.mobilePhone.text = users.mobilePhone
         detailViewController.emailLabel.text = users.email

@@ -10,6 +10,7 @@ import CoreData
 
 class CreateViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var photo: UIImage = UIImage()
+    var reloadData: (() -> Void)?
     
     lazy var addPhotoButton: UIButton = {
         let button = UIButton()
@@ -210,9 +211,17 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     var heightConstraint: NSLayoutConstraint?
     
+    override func viewWillAppear(_ animated: Bool) {
+        validateForm()
+        navigationItem.rightBarButtonItem?.isEnabled = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .secondarySystemBackground
+        firstNameTextField.formTextField.delegate = self
+        mobilePhoneTextField.formTextField.delegate = self
+        emailTextField.formTextField.delegate = self
         addSubview()
         configNavigationView()
         setupConstraint()
@@ -271,10 +280,12 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         userEntity.address = addressTextField.formTextField.text
         userEntity.notes = notesTextField.formTextField.text
         userEntity.photo = photo.jpegData(compressionQuality: 0.5)
-                
+
         do {
             try managedContext.save()
-//            print("sukses",userEntity)
+
+            reloadData?()
+            self.navigationController?.dismiss(animated: true, completion:nil);
             
         } catch {
             print("Error")
@@ -303,15 +314,22 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
+    private func validateForm() {
+        let isFirstNameEmpty = firstNameTextField.formTextField.text == ""
+        let isMobilePhoneEmpty = mobilePhoneTextField.formTextField.text == ""
+        let isEmailEmpty = emailTextField.formTextField.text == ""
+        if !isFirstNameEmpty && !isMobilePhoneEmpty && !isEmailEmpty {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+    }
+    
     private func setupConstraint() {
         scrollView.translatesAutoresizingMaskIntoConstraints            = false
         containerView.translatesAutoresizingMaskIntoConstraints         = false
         addPhotoStackView.translatesAutoresizingMaskIntoConstraints     = false
         namesStackView.translatesAutoresizingMaskIntoConstraints        = false
-//        mobilePhoneTextField.translatesAutoresizingMaskIntoConstraints  = false
-//        emailTextField.translatesAutoresizingMaskIntoConstraints        = false
-//        addressTextField.translatesAutoresizingMaskIntoConstraints      = false
-        
         
         scrollView.topAnchor.constraint(
             equalTo: view.topAnchor).isActive       = true
@@ -391,4 +409,11 @@ class CreateViewController: UIViewController, UIImagePickerControllerDelegate, U
         
     }
     
+}
+
+extension CreateViewController: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        validateForm()
+        print(textField.text)
+    }
 }
