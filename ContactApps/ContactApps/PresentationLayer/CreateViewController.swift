@@ -61,7 +61,7 @@ class CreateViewController: UIViewController {
     
     lazy var dateOfBirthTextField: FormTextField = {
         var dateOfBirthTF = FormTextField()
-        dateOfBirthTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        dateOfBirthTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         dateOfBirthTF.configure(placeholder: "Date of Birth")
         dateOfBirthTF.setHeight = 40
         dateOfBirthTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -83,13 +83,10 @@ class CreateViewController: UIViewController {
     
     lazy var mobilePhoneTextField: FormTextField = {
         var mobilePhoneTF = FormTextField()
-<<<<<<< HEAD
 //        mobilePhoneTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         mobilePhoneTF.configure(placeholder: "Mobile phone")
-=======
-        mobilePhoneTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        mobilePhoneTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         mobilePhoneTF.configure(placeholder: "Mobile Phone")
->>>>>>> 248d0e95674801dfc2f90f7e11dfc0ca77c312cf
         mobilePhoneTF.setHeight = 40
         mobilePhoneTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
         
@@ -97,7 +94,6 @@ class CreateViewController: UIViewController {
     }()
     
     lazy var emailTextField: FormTextField = {
-<<<<<<< HEAD
         var emailTF = FormTextField()
 //        emailTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         emailTF.configure(placeholder: "Email")
@@ -113,26 +109,21 @@ class CreateViewController: UIViewController {
         addressTF.configure(placeholder: "Address")
         addressTF.setHeight = 40
         addressTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
-=======
         var emailTextTF = FormTextField()
-        emailTextTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        emailTextTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         emailTextTF.configure(placeholder: "Email")
         emailTextTF.setHeight = 40
         emailTextTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
->>>>>>> 248d0e95674801dfc2f90f7e11dfc0ca77c312cf
         
         return emailTextTF
     }()
     
     lazy var notesTextField: FormTextField = {
         var notesTF = FormTextField()
-<<<<<<< HEAD
 //        notesTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         notesTF.configure(placeholder: "First name")
-=======
-        notesTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        notesTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         notesTF.configure(placeholder: "Notes")
->>>>>>> 248d0e95674801dfc2f90f7e11dfc0ca77c312cf
         notesTF.setHeight = 40
         notesTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
         
@@ -275,8 +266,8 @@ class CreateViewController: UIViewController {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         let userEntity = UserEntity(context: managedContext)
-        userEntity.first = firstNameTextField.formTextField.text
-        userEntity.last = lastNameTextField.formTextField.text
+//        userEntity.first = firstNameTextField.formTextField.text
+//        userEntity.last = lastNameTextField.formTextField.text
         
         
         do {

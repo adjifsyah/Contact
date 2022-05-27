@@ -8,10 +8,20 @@
 import UIKit
 import CoreData
 
-<<<<<<< HEAD
-class ContactTableViewController: UITableViewController {
+class ContactTableViewController: UITableViewController, UISearchBarDelegate {
     var context: NSManagedObjectContext?
     var users: [NSManagedObject] = []
+    
+    lazy var searchBar: UISearchBar = {
+        var searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = " Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.backgroundImage = UIImage()
+        searchBar.delegate = self
+        return searchBar
+    }()
     
     override func viewWillAppear(_ animated: Bool) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -29,27 +39,12 @@ class ContactTableViewController: UITableViewController {
         
         tableView.reloadData()
     }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "contactListCell")
         tableView.delegate = self
         tableView.dataSource = self
-=======
-class ContactTableViewController: UITableViewController, UISearchBarDelegate {
-    lazy var searchBar:UISearchBar = {
-        var searchBar = UISearchBar()
-        searchBar.searchBarStyle = UISearchBar.Style.default
-        searchBar.placeholder = " Search..."
-        searchBar.sizeToFit()
-        searchBar.isTranslucent = false
-        searchBar.backgroundImage = UIImage()
-        searchBar.delegate = self
-        return searchBar
-    }()
-   
-    override func viewDidLoad() {
-        super.viewDidLoad()
->>>>>>> 248d0e95674801dfc2f90f7e11dfc0ca77c312cf
         setupNavigationItem()
         tableView.tableHeaderView = searchBar
 //        view.addSubview(searchBar)
@@ -59,11 +54,7 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
     {
         print(textSearched)
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> 248d0e95674801dfc2f90f7e11dfc0ca77c312cf
     func setupNavigationItem() {
         title = "Contact"
         buttonAddView()
@@ -86,7 +77,7 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return users.count
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
