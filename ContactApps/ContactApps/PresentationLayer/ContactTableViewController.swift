@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 
+<<<<<<< HEAD
 class ContactTableViewController: UITableViewController {
     var context: NSManagedObjectContext?
     var users: [NSManagedObject] = []
@@ -33,9 +34,36 @@ class ContactTableViewController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "contactListCell")
         tableView.delegate = self
         tableView.dataSource = self
+=======
+class ContactTableViewController: UITableViewController, UISearchBarDelegate {
+    lazy var searchBar:UISearchBar = {
+        var searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = " Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.backgroundImage = UIImage()
+        searchBar.delegate = self
+        return searchBar
+    }()
+   
+    override func viewDidLoad() {
+        super.viewDidLoad()
+>>>>>>> 248d0e95674801dfc2f90f7e11dfc0ca77c312cf
         setupNavigationItem()
+        tableView.tableHeaderView = searchBar
+//        view.addSubview(searchBar)
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange textSearched: String)
+    {
+        print(textSearched)
+    }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> 248d0e95674801dfc2f90f7e11dfc0ca77c312cf
     func setupNavigationItem() {
         title = "Contact"
         buttonAddView()

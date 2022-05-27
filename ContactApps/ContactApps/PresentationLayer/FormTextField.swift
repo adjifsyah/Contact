@@ -43,6 +43,10 @@ class FormTextField: UIView {
     
     func configure(placeholder: String, backgroundColor: UIColor? = nil) {
         formTextField.placeholder = placeholder
+        formTextField.attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        )
         formTextField.backgroundColor = backgroundColor
     }
     
