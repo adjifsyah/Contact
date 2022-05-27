@@ -8,7 +8,8 @@
 import UIKit
 import CoreData
 
-class CreateViewController: UIViewController {
+class CreateViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    var photo: UIImage = UIImage()
     
     lazy var addPhotoButton: UIButton = {
         let button = UIButton()
@@ -16,7 +17,7 @@ class CreateViewController: UIViewController {
         let photoSymbol = UIImage(systemName: "person.crop.circle.fill", withConfiguration: Config)
         button.setImage(photoSymbol, for: .normal)
         button.tintColor = .gray
-//        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addPhotoAction), for: .touchUpInside)
         return button
     }()
     
@@ -26,6 +27,7 @@ class CreateViewController: UIViewController {
         lbl.textColor = .systemBlue
         lbl.font = UIFont.systemFont(ofSize: 16)
         lbl.textAlignment = .center
+//        lbl.addTarget(self, action: #selector(addPhotoAction), for: .touchUpInside)
         return lbl
     }()
     
@@ -85,8 +87,6 @@ class CreateViewController: UIViewController {
         var mobilePhoneTF = FormTextField()
 //        mobilePhoneTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         mobilePhoneTF.configure(placeholder: "Mobile phone")
-//        mobilePhoneTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
-        mobilePhoneTF.configure(placeholder: "Mobile Phone")
         mobilePhoneTF.setHeight = 40
         mobilePhoneTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
         
@@ -109,15 +109,10 @@ class CreateViewController: UIViewController {
         addressTF.configure(placeholder: "Address")
         addressTF.setHeight = 40
         addressTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
-        var emailTextTF = FormTextField()
-//        emailTextTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
-        emailTextTF.configure(placeholder: "Email")
-        emailTextTF.setHeight = 40
-        emailTextTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
         
-        return emailTextTF
+        return addressTF
     }()
-    
+
     lazy var notesTextField: FormTextField = {
         var notesTF = FormTextField()
 //        notesTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
@@ -184,7 +179,6 @@ class CreateViewController: UIViewController {
             addPhotoTextButton,
         ])
         addPhotoStackView.axis = .vertical
-//        addPhotoStackView.backgroundColor = .white
         return addPhotoStackView
     }()
     
@@ -196,6 +190,7 @@ class CreateViewController: UIViewController {
             dateOfBirthTextField,
             mobilePhoneTextField,
             emailTextField,
+            addressTextField,
             notesTextField
         ])
         nameStackView.axis = .vertical
@@ -275,13 +270,10 @@ class CreateViewController: UIViewController {
         userEntity.email = emailTextField.formTextField.text
         userEntity.address = addressTextField.formTextField.text
         userEntity.notes = notesTextField.formTextField.text
-
-//        sampleImage.jpegData(compressionQuality: 1.0)
-        
-        
+        userEntity.photo = photo.jpegData(compressionQuality: 0.5)
+                
         do {
             try managedContext.save()
-//            print("sukses",userEntity)
         } catch {
             print("Error")
         }
@@ -291,6 +283,22 @@ class CreateViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E, dd MMM yyyy"
         dateOfBirthTextField.formTextField.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+    @objc func addPhotoAction(_ sender: Any) {
+        let imagePickerVC = UIImagePickerController()
+        imagePickerVC.sourceType = .photoLibrary
+        imagePickerVC.delegate = self // new
+        present(imagePickerVC, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+
+        if let image = info[.originalImage] as? UIImage {
+            photo = image
+            addPhotoButton.setImage(image.circularImage(size: CGSize(width: 170, height: 170)), for: .normal)
+        }
     }
     
     private func setupConstraint() {
