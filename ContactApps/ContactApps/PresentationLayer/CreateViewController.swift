@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import CoreData
 
 class CreateViewController: UIViewController {
     lazy var firstNameTextField: FormTextField = {
         var firstNameTF = FormTextField()
-        firstNameTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        firstNameTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         firstNameTF.configure(placeholder: "First name")
         firstNameTF.setHeight = 40
         firstNameTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -20,7 +21,7 @@ class CreateViewController: UIViewController {
     
     lazy var lastNameTextField: FormTextField = {
         var firstNameTF = FormTextField()
-        firstNameTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        firstNameTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         firstNameTF.configure(placeholder: "Last name")
         firstNameTF.setHeight = 40
         firstNameTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -30,7 +31,7 @@ class CreateViewController: UIViewController {
     
     lazy var aliasNameTextField: FormTextField = {
         var aliasNameTF = FormTextField()
-        aliasNameTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        aliasNameTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         aliasNameTF.configure(placeholder: "Alias name")
         aliasNameTF.setHeight = 40
         aliasNameTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -40,7 +41,7 @@ class CreateViewController: UIViewController {
     
     lazy var mobilePhoneTextField: FormTextField = {
         var mobilePhoneTF = FormTextField()
-        mobilePhoneTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        mobilePhoneTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         mobilePhoneTF.configure(placeholder: "Mobile phone")
         mobilePhoneTF.setHeight = 40
         mobilePhoneTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -50,7 +51,7 @@ class CreateViewController: UIViewController {
     
     lazy var emailTextField: FormTextField = {
         var emailTF = FormTextField()
-        emailTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        emailTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         emailTF.configure(placeholder: "Email")
         emailTF.setHeight = 40
         emailTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -60,7 +61,7 @@ class CreateViewController: UIViewController {
     
     lazy var addressTextField: FormTextField = {
         var addressTF = FormTextField()
-        addressTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        addressTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         addressTF.configure(placeholder: "Address")
         addressTF.setHeight = 40
         addressTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -70,7 +71,7 @@ class CreateViewController: UIViewController {
     
     lazy var notesTextField: FormTextField = {
         var notesTF = FormTextField()
-        notesTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
+//        notesTF.formTextField.addTarget(self, action: #selector(firstNameChange(textField:)), for: .editingChanged)
         notesTF.configure(placeholder: "First name")
         notesTF.setHeight = 40
         notesTF.setMargin = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: -16)
@@ -143,16 +144,25 @@ class CreateViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
-    @objc private func firstNameChange(textField: UITextField) {
-        print(textField.text)
-    }
-    
     @objc private func cancel(textField: UITextField) {
         dismiss(animated: true, completion: nil)
     }
     
     @objc private func saveContact(textField: UITextField) {
-        print("Save")
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let userEntity = UserEntity(context: managedContext)
+        userEntity.first_name = firstNameTextField.formTextField.text
+        userEntity.last_name = lastNameTextField.formTextField.text
+        
+        
+        do {
+            try managedContext.save()
+        } catch {
+            print("Error")
+        }
     }
     
     private func setupConstraint() {
