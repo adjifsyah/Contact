@@ -266,12 +266,14 @@ class CreateViewController: UIViewController {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         let userEntity = UserEntity(context: managedContext)
-//        userEntity.first = firstNameTextField.formTextField.text
-//        userEntity.last = lastNameTextField.formTextField.text
+//        print(userEntity)
+        userEntity.first_name = firstNameTextField.formTextField.text
+        userEntity.last_name = lastNameTextField.formTextField.text
         
         
         do {
             try managedContext.save()
+//            print("sukses",userEntity)
         } catch {
             print("Error")
         }

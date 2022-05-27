@@ -10,7 +10,7 @@ import CoreData
 
 class ContactTableViewController: UITableViewController, UISearchBarDelegate {
     var context: NSManagedObjectContext?
-    var users: [NSManagedObject] = []
+    var users: [UserModel] = []
     
     lazy var searchBar: UISearchBar = {
         var searchBar = UISearchBar()
@@ -31,8 +31,16 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserEntity")
         
         do {
-            let result = try managedContext.fetch(fetchRequest) as? [NSManagedObject]
-            users = result ?? []
+            let result = try managedContext.fetch(fetchRequest) as! [NSManagedObject]
+            result.forEach{ user in
+                users.append(
+                    UserModel(
+                        firstName: user.value(forKey: "first_name") as! String,
+                        lastName: user.value(forKey: "last_name") as! String
+                    )
+                )
+            }
+            print(users)
         } catch let err{
             print(err)
         }
@@ -77,14 +85,15 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return users.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactListCell", for: indexPath)
 //        let row: Int = indexPath.row
-        
-        cell.textLabel?.text = UserEntity.value(forKey: "first") as? String
+        let firstname = users[indexPath.row].firstName
+        print(firstname)
+        cell.textLabel?.text = firstname
         return cell
     }
 
