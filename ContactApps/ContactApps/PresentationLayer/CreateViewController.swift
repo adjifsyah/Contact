@@ -269,6 +269,14 @@ class CreateViewController: UIViewController {
 //        print(userEntity)
         userEntity.first_name = firstNameTextField.formTextField.text
         userEntity.last_name = lastNameTextField.formTextField.text
+        userEntity.alias_name = aliasNameTextField.formTextField.text
+        userEntity.date_of_birth = dateOfBirthTextField.formTextField.text
+        userEntity.mobile_phone = mobilePhoneTextField.formTextField.text
+        userEntity.email = emailTextField.formTextField.text
+        userEntity.address = addressTextField.formTextField.text
+        userEntity.notes = notesTextField.formTextField.text
+
+//        sampleImage.jpegData(compressionQuality: 1.0)
         
         
         do {
