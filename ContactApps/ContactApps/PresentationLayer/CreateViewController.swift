@@ -274,6 +274,7 @@ class CreateViewController: UIViewController {
         do {
             try managedContext.save()
 //            print("sukses",userEntity)
+            
         } catch {
             print("Error")
         }

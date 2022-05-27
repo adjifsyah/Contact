@@ -32,7 +32,9 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
         
         do {
             let result = try managedContext.fetch(fetchRequest) as! [NSManagedObject]
-            result.forEach{ user in
+            print(result.count)
+            guard result.count != 0 else {return}
+            result.forEach { user in
                 users.append(
                     UserModel(
                         firstName: user.value(forKey: "first_name") as! String,
@@ -95,6 +97,18 @@ class ContactTableViewController: UITableViewController, UISearchBarDelegate {
         print(firstname)
         cell.textLabel?.text = firstname
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexSelect = tableView.indexPathForSelectedRow
+        let cellCurrent = tableView.cellForRow(at: indexSelect ?? indexPath)
+        let detailViewController = DetailViewController()
+        detailViewController.fullnameLabel.text = cellCurrent?.textLabel?.text
+        detailViewController.mobilePhone.text = "0856 9999 9999"
+        
+        detailViewController.emailLabel.text = "binar@academy.com"
+        
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 
 }
